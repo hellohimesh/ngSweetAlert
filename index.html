@@ -1,0 +1,78 @@
+<HTML>
+	<head>
+		<title> sweet alert
+		</title>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+		<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="bower_components/ngSweetAlert/SweetAlert.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl" class="text-center">
+	<div class="row">
+	
+			<button class="btn btn-primary  btn-lg" ng-click="tryme1()"> Try me</button> A basic message<br><br>
+			<button class="btn btn-primary  btn-lg" ng-click="tryme2()"> Try me</button> A title with a text under<br><br>
+			<button class="btn btn-primary  btn-lg" ng-click="tryme3()"> Try me</button> A success message!<br><br>
+			<button class="btn btn-primary  btn-lg" ng-click="tryme4()"> Try me</button> A warning message, with a function attached to the "Confirm"-button<br><br>
+			<button class="btn btn-primary  btn-lg" ng-click="tryme5()"> Try me</button> ... and by passing a parameter, you can execute something else for "Cancel".<br><br>
+			<button class="btn btn-primary  btn-lg" ng-click="tryme6()"> Try me </button> A message with a custom icon
+			</div>
+	</body>
+	<script>
+		angular.module('myApp',['oitozero.ngSweetAlert'])
+		.controller('myCtrl',function($scope,SweetAlert){
+			
+			
+
+			$scope.tryme1 = function(){
+				SweetAlert.swal("Here's a message");
+			}
+			$scope.tryme2 = function(){
+				SweetAlert.swal("Here's a message!", "It's pretty, isn't it?");
+			}
+			$scope.tryme3 = function(){
+				SweetAlert.swal("Good job!", "You clicked the button!", "success");
+			}
+			$scope.tryme4 = function(){
+				SweetAlert.swal({
+					title: "Are you sure?",
+					text: "Your will not be able to recover this imaginary file!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes, delete it!",
+					closeOnConfirm: false}, 
+					function(){ 
+						SweetAlert.swal("Booyah!");
+					});
+			}
+			$scope.tryme5 = function(){
+				SweetAlert.swal({
+					title: "Are you sure?",
+					text: "Your will not be able to recover this imaginary file!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plx!",
+					closeOnConfirm: false,
+					closeOnCancel: false }, 
+					function(isConfirm){ 
+						if (isConfirm) {
+							SweetAlert.swal("Deleted!", "Your imaginary file has been deleted.", "success");
+						} else {
+							SweetAlert.swal("Cancelled", "Your imaginary file is safe :)", "error");
+						}
+					});
+			}
+			$scope.tryme6 = function(){
+				SweetAlert.swal({
+					title: "Sweet!",
+					text: "Here's a custom image.",
+					imageUrl: "https://avatars0.githubusercontent.com/u/16589174?v=4&s=460" });
+			}
+		})
+
+	</script>
+</HTML>
